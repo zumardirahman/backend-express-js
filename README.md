@@ -7,3 +7,5 @@ Author : Zumardi Rahman, S.Kom, M.Kom
     npm i cors
     npm i mysql2
     npm i sequelize
+
+    npm i -g nodemon
