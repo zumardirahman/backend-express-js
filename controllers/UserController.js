@@ -24,6 +24,8 @@ export const getUserById = async (req, res) => {
   
 
 export const createUser = async (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
     try {
       await User.create(req.body)
       res.status(201).json({msg: "User Created"});

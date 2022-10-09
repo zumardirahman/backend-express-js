@@ -25,8 +25,9 @@ export const getProductById = async (req, res) => {
 };
 
 export const createProduct = (req, res) => {
-  if (req.files === null)
-    return res.status(400).json({ msg: "No File Uploaded" });
+  console.log(req.body);
+  console.log(req.files);
+  if (req.files === null) return res.status(400).json({ msg: "No File Uploaded" });
   //   console.log(req.files.file);
   const name = req.body.title;
   const file = req.files.file;
