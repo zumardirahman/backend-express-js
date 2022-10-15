@@ -1,6 +1,6 @@
 import express from "express";
 import FileUpload from "express-fileupload"; //depedencies upload data
-import cors from "cors";
+import cors from "cors"; //ini digunakan untuk agar API dapat di askes dari luar domain
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
@@ -17,7 +17,7 @@ import productRoute from "./routes/ProductRoute.js";
 const app=express();
 
 //as middelware 
-app.use(cors());
+app.use(cors({credential:true, origin:'http://localhost:3000'})); //cred : agar klien mengirim credendsial //origin : domain untuk dapat mengskses API
 app.use(cookieParser()); //ini digunakan utk membuat refresh token agar setiap  token expire tidak perlu login lagi
 
 //express json
