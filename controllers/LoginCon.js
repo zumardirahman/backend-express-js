@@ -93,8 +93,8 @@ export const logout = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-  const { name, email, gender, password, confPassword } = req.body;
-  if (password !== confPassword)
+  const { name, email, gender, password, confirmPassword } = req.body;
+  if (password !== confirmPassword)
     return res
       .status(400)
       .json({ msg: "Password dan confirm password tidak cocok" });
