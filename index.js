@@ -17,7 +17,13 @@ import productRoute from "./routes/ProductRoute.js";
 const app=express();
 
 //as middelware 
-app.use(cors({credential:true, origin:'http://localhost:3000'})); //cred : agar klien mengirim credendsial //origin : domain untuk dapat mengskses API
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions)); //cred : agar klien mengirim credendsial //origin : domain untuk dapat mengskses API
+
 app.use(cookieParser()); //ini digunakan utk membuat refresh token agar setiap  token expire tidak perlu login lagi
 
 //express json
