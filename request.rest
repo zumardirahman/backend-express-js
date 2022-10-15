@@ -1,5 +1,5 @@
 GET http://localhost:5000/users
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJadW1hcmRpIFJhaG1hbiIsImdlbmRlciI6Ik1hbGUiLCJlbWFpbCI6Inp1bWFyMjAxNEBnbWFpbC5jb20iLCJpYXQiOjE2NjU4MTI0MDYsImV4cCI6MTY2NTgxMjQyMX0.TLZK_oknf9TJKuhJEM8vU9jZ1Af9COO-IABFIu4tE2g
 ###
 GET http://localhost:5000/users/1
 
@@ -28,13 +28,27 @@ DELETE  http://localhost:5000/users/5
 
 
 ###
-POST http://localhost:5000/users/register
+POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "name":"Zumardi Rahman",
-    "email": "zumar2014@gmail.com",
+    "name":"Zumardi Rahmanx",
+    "email": "zumar2014@gmail.come",
     "gender": "Male",
     "password": "123456",
     "confPassword": "123456"
 }
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "zumar2014@gmail.com",
+    "password": "123456"
+}
+
+
+###
+GET http://localhost:5000/token
+

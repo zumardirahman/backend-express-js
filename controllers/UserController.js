@@ -1,32 +1,12 @@
 import User from "../models/UserModel.js";
-import bcrypt from "bcrypt"
+// import bcrypt from "bcrypt"
 
-
-
-export const register = async (req, res) => {
-  const {name, email, gender, password, confPassword} = req.body
-  if(password !== confPassword) return res.status(400).json({msg: "Password dan confirm password tidak cocok"})
- 
-  const salt=await bcrypt.genSalt()
-  const hashPassword= await bcrypt.hash(password, salt)
-   
-  try {
-    await User.create({
-      name : name,
-      gender : gender,
-      email: email,
-      password:hashPassword 
-    })
-    res.status(201).json({msg: "Registered Succesfully"});
-
-  } catch (error) {
-    console.log(error.message);
-  }
-};
 
 export const getUsers = async (req, res) => {
   try {
-    const response = await User.findAll();
+    const response = await User.findAll({
+      attributes : ['id','name','email', 'gender'] //mengambil field yg diperlukan saja
+    });
     res.status(200).json(response);
   } catch (error) {
     console.log(error.message);

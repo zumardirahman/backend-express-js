@@ -1,16 +1,24 @@
 import express from "express";
 import FileUpload from "express-fileupload"; //depedencies upload data
 import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
+
+//config
+dotenv.config()
 
 //table data
+import loginRoute from "./routes/LoginRoute.js";
 import userRoute from "./routes/UserRoute.js";
 import productRoute from "./routes/ProductRoute.js";
 
 
 const app=express();
 
-//middelware
+//as middelware 
 app.use(cors());
+app.use(cookieParser()); //ini digunakan utk membuat refresh token agar setiap  token expire tidak perlu login lagi
 
 //express json
 app.use(express.json());
@@ -22,6 +30,7 @@ app.use(FileUpload());
 app.use(express.static("public"));
 
 //fungsi routes
+app.use(loginRoute);
 app.use(userRoute);
 app.use(productRoute);
 
