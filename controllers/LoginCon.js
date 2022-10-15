@@ -60,6 +60,38 @@ export const login = async (req, res) => {
   }
 };
 
+export const logout = async (req, res) => {
+  //ambil value token yang di set di cookie
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) return res.sendStatus(204); //204 = no content
+  const user = await User.findAll({
+    where: {
+      refresh_token: refreshToken,
+    },
+  });
+
+  //jika token tidak cocok antara database dengan yg dikirm klien
+  if (!user[0]) return res.sendStatus(204);
+     //jika cocok construct user id,name,email
+     const userId = user[0].id;
+
+     //update refresh token yang ada di db manejadi null ketika logout
+     //simpan refresh token ke database
+    await User.update(
+        { refresh_token: null },
+        {
+          where: {
+            id: userId,
+          },
+        }
+      );
+      //hapus cookie
+      res.clearCookie('refreshToken')
+
+      return res.sendStatus(200)
+  
+};
+
 export const register = async (req, res) => {
   const { name, email, gender, password, confPassword } = req.body;
   if (password !== confPassword)

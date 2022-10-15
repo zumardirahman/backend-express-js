@@ -1,5 +1,5 @@
 import express from "express";
-import {login, register} from "../controllers/LoginCon.js"
+import {login, register, logout} from "../controllers/LoginCon.js"
 import { refreshToken } from "../controllers/RefreshTokenCon.js";
 
 const router = express.Router()
@@ -10,5 +10,7 @@ router.get('/token',refreshToken)
 router.post('/login',login)
 
 router.post('/register',register)
+
+router.delete('/logout',logout)
 
 export default router;
