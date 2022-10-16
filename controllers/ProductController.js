@@ -1,13 +1,30 @@
 import Product from "../models/ProductModel.js";
+import User from "../models/UserModel.js";
 import path from "path"; //mengambil extension
 import fs from "fs"; //file system untuk menghapus file bawaan node js
 
 export const getProducts = async (req, res) => {
   try {
-    const response = await Product.findAll();
+    let response;
+    if (req.role === "admin") {
+      //req.role didapat dari kiriman sesion pada middle ware
+      response = await Product.findAll({
+        attributes: ["uuid", "name", "price"],
+        include: [{ model: User, attributes: ["name", "email"] }],
+      });
+    } else if (req.role === "user") {
+      response = await Product.findAll({
+        attributes: ["uuid", "name", "price"],
+        where: {
+          userId: req.userId,
+        },
+        include: [{ model: User, attributes: ["name", "email"] }],
+      });
+    }
+
     res.status(200).json(response);
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ msg: error.message });
   }
 };
 
@@ -27,10 +44,13 @@ export const getProductById = async (req, res) => {
 export const createProduct = (req, res) => {
   console.log(req.body);
   console.log(req.files);
-  if (req.files === null) return res.status(400).json({ msg: "No File Uploaded" });
+  if (req.files === null)
+    return res.status(400).json({ msg: "No File Uploaded" });
   //   console.log(req.files.file);
-  const name = req.body.title;
+  const { name, price } = req.body;
+
   const file = req.files.file;
+
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
   const fileName = file.md5 + ext;
@@ -45,7 +65,13 @@ export const createProduct = (req, res) => {
   file.mv(`./public/images/${fileName}`, async (err) => {
     if (err) return res.status(500).json({ msg: err.message });
     try {
-      await Product.create({ name: name, image: fileName, url: url });
+      await Product.create({
+        name: name,
+        price: price,
+        userId: req.userId,
+        image: fileName,
+        url: url,
+      });
       res.status(201).json({ msg: "Product Created Succesfully" });
     } catch (error) {
       console.log(error.message);
@@ -80,7 +106,7 @@ export const updateProduct = async (req, res) => {
       const filepath = `./public/images/${product.image}`;
       fs.unlinkSync(filepath); //untuk hapus file di directory
     }
-    
+
     file.mv(`./public/images/${fileName}`, (err) => {
       if (err) return res.status(500).json({ msg: err.message });
     });

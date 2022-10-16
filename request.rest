@@ -4,13 +4,50 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "name":"Zumardi Rahmanx",
-    "email": "zumar2014@gmail.come",
+    "name":"Nama Lengkap",
+    "email": "email@gmail.come",
     "gender": "Male",
+    "role": "user",
     "password": "123456",
-    "confPassword": "123456"
+    "confirmPassword": "123456"
 }
 
+
+//////////  AUTH  ////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+### 
+//login user
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "indah@gmail.com",
+    "password": "123456"
+}
+### 
+//login admin
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "zumar2014@gmail.com",
+    "password": "123456"
+}
+
+###
+//ambil token baru
+GET http://localhost:5000/token
+
+### 
+//akses me
+GET http://localhost:5000/me
+
+### 
+//logout
+DELETE http://localhost:5000/logout
+
+
+//////////  USER  ////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 ### 
 //create user
@@ -53,34 +90,3 @@ Content-Type: application/json
 ###
 //delete user
 DELETE  http://localhost:5000/users/f24c95dd-41a2-4baf-8531-3518b2ca7558
-
-### 
-//login user
-POST http://localhost:5000/login
-Content-Type: application/json
-
-{
-    "email": "indah@gmail.com",
-    "password": "123456"
-}
-### 
-//login admin
-POST http://localhost:5000/login
-Content-Type: application/json
-
-{
-    "email": "zumar2014@gmail.com",
-    "password": "123456"
-}
-
-###
-//ambil token baru
-GET http://localhost:5000/token
-
-### 
-//Akses Me
-GET http://localhost:5000/me
-
-### 
-//Akses Me
-DELETE http://localhost:5000/logout

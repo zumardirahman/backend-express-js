@@ -1,4 +1,6 @@
 import express from "express";
+import {vSession} from "../middleware/VerifyAuth.js" //utk verifikasi endpoint yg tidak dapat diakses jika tidak login
+
 import {
   getProducts,
   getProductById,
@@ -9,10 +11,10 @@ import {
 
 const router = express.Router();
 
-router.get("/products", getProducts);
-router.get("/products/:id", getProductById);
-router.post("/products", createProduct);
-router.patch("/products/:id", updateProduct);
-router.delete("/products/:id", deleteProduct);
+router.get("/products",vSession, getProducts);
+router.get("/products/:id",vSession, getProductById);
+router.post("/products",vSession, createProduct);
+router.patch("/products/:id",vSession, updateProduct);
+router.delete("/products/:id",vSession, deleteProduct);
 
 export default router;

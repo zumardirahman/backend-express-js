@@ -127,7 +127,7 @@ export const logout = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-  const { name, email, gender, password, confirmPassword } = req.body;
+  const { name, email,role, gender, password, confirmPassword } = req.body;
   if (password !== confirmPassword)
     return res
       .status(400)
@@ -141,6 +141,7 @@ export const register = async (req, res) => {
       name: name,
       gender: gender,
       email: email,
+      role: role,
       password: hashPassword,
     });
     res.status(201).json({ msg: "Registered Succesfully" });

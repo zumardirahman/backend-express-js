@@ -5,10 +5,10 @@ import {vSession, vAdminOnly} from "../middleware/VerifyAuth.js" //utk verifikas
 const router = express.Router()
 
 router.get('/users', vSession,vAdminOnly, getUsers)
-router.get('/users/:id',vSession, getUserById)
-router.post('/users',vSession, createUser)
-router.patch('/users/:id',vSession, updateUser)
-router.delete('/users/:id',vSession, deleteUser)
+router.get('/users/:id',vSession,vAdminOnly, getUserById)
+router.post('/users',vSession,vAdminOnly, createUser)
+router.patch('/users/:id',vSession,vAdminOnly, updateUser)
+router.delete('/users/:id',vSession,vAdminOnly, deleteUser)
 
 
 export default router;
