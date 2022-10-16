@@ -1,11 +1,11 @@
 import express from "express";
 import session from "express-session";
+import SequelizeStore from "connect-session-sequelize";
 import FileUpload from "express-fileupload"; //depedencies upload data
 import cors from "cors"; //ini digunakan untuk agar API dapat di askes dari luar domain
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-// import db from "../config/database.js"; //aktifkan saat syn table
-
+import db from "./config/database.js"; //aktifkan saat syn table
 
 //config
 dotenv.config()
@@ -17,12 +17,17 @@ import productRoute from "./routes/ProductRoute.js";
 
 
 const app=express();
+const  sessionStore = SequelizeStore(session.Store);
+const  store = new sessionStore({
+  db: db,
+});
 
 //session
 app.use(session({
     secret:process.env.SESS_SECRET,
     resave: false,
     saveUninitialized : true,
+    store: store,
     cookie : {
         secure: 'auto', //pilih true kalo https
     }
@@ -51,6 +56,9 @@ app.use(express.static("public"));
 app.use(loginRoute);
 app.use(userRoute);
 app.use(productRoute);
+
+//membuat table session
+// store.sync()
 
 //sync untuk generate table
 // aktifkan ini jika tidak ada table
