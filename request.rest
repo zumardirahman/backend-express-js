@@ -1,31 +1,19 @@
-GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJadW1hcmRpIFJhaG1hbiIsImdlbmRlciI6Ik1hbGUiLCJlbWFpbCI6Inp1bWFyMjAxNEBnbWFpbC5jb20iLCJpYXQiOjE2NjU4MTMwMjMsImV4cCI6MTY2NTgxMzA0M30.m3ju_fggFDV0azV_Wela69f2XQTeVpsV8FFqSntGqIs
-###
-GET http://localhost:5000/users/1
 
 ###
-POST http://localhost:5000/users
+//Lgin API
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "name":"Zumardi rahman",
     "email": "zumar2014@gmail.com",
-    "gender": "Male"
+    "password": "123456"
 }
 
 ###
-PATCH  http://localhost:5000/users/6
-Content-Type: application/json
-
-{
-    "name":"Indah Hariani",
-    "email": "indahhariani@gmail.com",
-    "gender": "Female"
-}
+GET http://localhost:5000/token
 
 ###
-DELETE  http://localhost:5000/users/5
-
+DELETE  http://localhost:5000/logout
 
 ###
 POST http://localhost:5000/register
@@ -39,19 +27,54 @@ Content-Type: application/json
     "confPassword": "123456"
 }
 
+
+### 
+//create user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name":"Indah Hariani",
+    "email": "indah@gmail.com",
+    "gender": "Female",
+    "password": "123456",
+    "confirmPassword": "123456",
+    "role": "user"
+}
+
 ###
+//get all user
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJadW1hcmRpIFJhaG1hbiIsImdlbmRlciI6Ik1hbGUiLCJlbWFpbCI6Inp1bWFyMjAxNEBnbWFpbC5jb20iLCJpYXQiOjE2NjU4MTMwMjMsImV4cCI6MTY2NTgxMzA0M30.m3ju_fggFDV0azV_Wela69f2XQTeVpsV8FFqSntGqIs
+###
+//get singel user
+GET http://localhost:5000/users/bb9cf2cf-39c2-4c6f-911a-912ff54fa678
+
+
+###
+//update user
+PATCH  http://localhost:5000/users/bb9cf2cf-39c2-4c6f-911a-912ff54fa678
+Content-Type: application/json
+
+{
+    "name":"Indah Hariani",
+    "email": "indah@gmail.com",
+    "gender": "Female",
+    "password": "",
+    "confirmPassword": "",
+    "role": "user"
+}
+
+###
+//delete user
+DELETE  http://localhost:5000/users/64c2e8b1-b514-46f9-b607-a0224baf5c70
+
+### 
+//login user
 POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "zumar2014@gmail.com",
+    "email": "indah@gmail.com",
     "password": "123456"
 }
-
-
-###
-GET http://localhost:5000/token
-
-
-###
-DELETE  http://localhost:5000/logout

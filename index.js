@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 dotenv.config()
 
 //table data
-import loginRoute from "./routes/LoginRoute.js";
+import loginRoute from "./routes/AuthRoute.js";
 import userRoute from "./routes/UserRoute.js";
 import productRoute from "./routes/ProductRoute.js";
 
