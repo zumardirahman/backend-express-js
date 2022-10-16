@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import db from "../config/database.js";
 
 //membuat asosiasi user
 import User from "./UserModel.js";
