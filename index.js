@@ -4,6 +4,7 @@ import FileUpload from "express-fileupload"; //depedencies upload data
 import cors from "cors"; //ini digunakan untuk agar API dapat di askes dari luar domain
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+// import db from "../config/database.js"; //aktifkan saat syn table
 
 
 //config
@@ -50,6 +51,12 @@ app.use(express.static("public"));
 app.use(loginRoute);
 app.use(userRoute);
 app.use(productRoute);
+
+//sync untuk generate table
+// aktifkan ini jika tidak ada table
+// (async () => {
+//   await db.sync();
+// })();
 
 //server run
 app.listen(process.env.APP_PORT, ()=> console.log(`server berjalan....`));

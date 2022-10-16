@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import db from "../config/database.js";
 
 const { DataTypes } = Sequelize;
 
@@ -56,7 +55,4 @@ export default User;
 
 //fungsi genegerate tabel tidak ada di database
 
-// aktifkan ini jika tidak ada table
-// (async () => {
-//   await db.sync();
-// })();
+

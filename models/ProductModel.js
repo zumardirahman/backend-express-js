@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import db from "../config/database.js";
 
 //membuat asosiasi user
 import User from "./UserModel.js";
@@ -53,9 +52,3 @@ User.hasMany(Product)
 Product.belongsTo(User, {foreignKey: 'userId'})
 
 export default Product;
-
-//fungsi genegerate tabel tidak ada di database
-
-(async () => {
-  await db.sync();
-})();
