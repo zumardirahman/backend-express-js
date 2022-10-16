@@ -123,7 +123,7 @@ export const logout = async (req, res) => {
   //hapus cookie
   res.clearCookie("refreshToken");
 
-  return res.sendStatus(200);
+  return res.status(200).json({msg : "anda telah logout"});
 };
 
 export const register = async (req, res) => {

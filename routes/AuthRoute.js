@@ -7,7 +7,7 @@ const router = express.Router()
 //ketika token expire makan tidak perlu login lagi, dan hanya perlu memanggil end poit ini untuk refresh tokennya
 router.get('/token',refreshToken)
 
-router.post('/me',Me)
+router.get('/me',Me)
 
 router.post('/login',login)
 
