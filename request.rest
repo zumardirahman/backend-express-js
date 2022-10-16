@@ -75,6 +75,14 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "indah@gmail.com",
+    "email": "zumar2014@gmail.com",
     "password": "123456"
 }
+
+### 
+//Akses Me
+GET http://localhost:5000/me
+
+### 
+//Akses Me
+DELETE http://localhost:5000/logout
