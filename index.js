@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 import FileUpload from "express-fileupload"; //depedencies upload data
 import cors from "cors"; //ini digunakan untuk agar API dapat di askes dari luar domain
 import dotenv from "dotenv";
@@ -16,9 +17,19 @@ import productRoute from "./routes/ProductRoute.js";
 
 const app=express();
 
+//session
+app.use(session({
+    secret:process.env.SESS_SECRET,
+    resave: false,
+    saveUninitialized : true,
+    cookie : {
+        secure: 'auto', //pilih true kalo https
+    }
+}));
+
 //as middelware 
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'http://localhost:3000', //domain yang kita izinkan untuk akses api
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
@@ -27,7 +38,7 @@ app.use(cors(corsOptions)); //cred : agar klien mengirim credendsial //origin : 
 app.use(cookieParser()); //ini digunakan utk membuat refresh token agar setiap  token expire tidak perlu login lagi
 
 //express json
-app.use(express.json());
+app.use(express.json()); // menerima data dalam format json
 
 //file upload fungsi
 app.use(FileUpload());
@@ -41,6 +52,6 @@ app.use(userRoute);
 app.use(productRoute);
 
 //server run
-app.listen(5000, ()=> console.log(`server berjalan....`));
+app.listen(process.env.APP_PORT, ()=> console.log(`server berjalan....`));
 
 //install nodemon secar global untuk 
