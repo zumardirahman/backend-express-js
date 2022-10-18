@@ -9,7 +9,7 @@ import db from "./config/database.js"; //aktifkan saat syn table
 
 //config
 dotenv.config()
-
+ 
 //table data
 import loginRoute from "./routes/AuthRoute.js";
 import userRoute from "./routes/UserRoute.js";
