@@ -158,7 +158,7 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   const product = await Product.findOne({
     where: {
-      id: req.params.id,
+      uuid: req.params.id,
     },
   });
 
@@ -171,7 +171,7 @@ export const deleteProduct = async (req, res) => {
 
     await Product.destroy({
       where: {
-        id: req.params.id,
+        id: product.id,
       },
     });
     res.status(200).json({ msg: "Product Deleted" });
